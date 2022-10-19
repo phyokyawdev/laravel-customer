@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PassportAuthController;
+use App\Http\Controllers\Api\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,12 @@ Route::middleware('auth:api')->group(function () {
     Route::get('get-user', [PassportAuthController::class, 'userInfo']);
 });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+/**
+ * User CRUD
+ */
+Route::apiResource('users', UserController::class);
+
+/**
+ * Non existing
+ */
+
