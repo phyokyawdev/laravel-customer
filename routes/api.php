@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CityController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PassportAuthController;
@@ -29,6 +30,12 @@ Route::middleware('auth:api')->group(function () {
  * User CRUD
  */
 Route::apiResource('users', UserController::class);
+
+
+/**
+ * City CRUD
+ */
+Route::apiResource('cities', CityController::class);
 
 /**
  * Non existing
