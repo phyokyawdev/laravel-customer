@@ -26,7 +26,7 @@ class UpdateUserRequest extends FormRequest
         return [
             'name' => [],
             'username' => ['unique:users'],
-            'email' => ['email|unique:users'],
+            'email' => ['email','unique:users'],
             'password' => []
         ];
     }
