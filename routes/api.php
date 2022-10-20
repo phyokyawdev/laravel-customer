@@ -2,11 +2,11 @@
 
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\CustomerController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PassportAuthController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ZoneController;
+use App\Http\Resources\FailResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,10 +20,10 @@ use App\Http\Controllers\Api\ZoneController;
 */
 
  
-Route::post('register', [PassportAuthController::class, 'register']);
 Route::post('login', [PassportAuthController::class, 'login']);
   
 Route::middleware('auth:api')->group(function () {
+    // test route for auth
     Route::get('get-user', [PassportAuthController::class, 'userInfo']);
 });
 
@@ -51,4 +51,6 @@ Route::apiResource('customers', CustomerController::class);
 /**
  * Non existing
  */
-
+Route::fallback(function() {
+    return (new FailResource(['message' => 'Route not exists!']))->response()->setStatusCode(404);
+});

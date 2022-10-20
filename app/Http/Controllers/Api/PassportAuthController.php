@@ -3,33 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Http\Resources\AuthResource;
+use App\Http\Resources\UserResource;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
 
 
 class PassportAuthController extends Controller
 {
-    public function register(Request $request)
-    {
-        $this->validate($request, [
-            'name' => 'required',
-            'username' => 'required',
-            'email' => 'email',
-            'password' => 'required',
-        ]);
-  
-        $user = User::create([
-            'name' => $request->name,
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => bcrypt($request->password)
-        ]);
-  
-        $token = $user->createToken('Laravel8PassportAuth')->accessToken;
-  
-        return response()->json(['token' => $token], 200);
-    }
-  
     /**
      * Login Req
      */
@@ -42,18 +23,16 @@ class PassportAuthController extends Controller
   
         if (auth()->attempt($data)) {
             $token = auth()->user()->createToken('Laravel8PassportAuth')->accessToken;
-            return response()->json(['token' => $token], 200);
+            $auth = (object)['token' => $token];
+            return new AuthResource($auth);
         } else {
-            return response()->json(['error' => 'Unauthorised'], 401);
+            throw new AuthenticationException("Incorrect username or password");
         }
     }
  
     public function userInfo() 
     {
- 
      $user = auth()->user();
-      
-     return response()->json(['user' => $user], 200);
- 
+     return new UserResource($user);
     }
 }

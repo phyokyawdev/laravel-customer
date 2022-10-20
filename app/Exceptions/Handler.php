@@ -50,15 +50,17 @@ class Handler extends ExceptionHandler
         }
 
         if($exception instanceof AuthenticationException) {
-            return (new FailResource(['message' => 'Not Allowed!']))->response()->setStatusCode(401);
+            $message = $exception->getMessage();
+            return (new FailResource(['message' => $message]))->response()->setStatusCode(401);
         }
         
         if($exception instanceof ValidationException) {
             return (new FailResource($exception->errors()))->response()->setStatusCode($exception->status);
         }
 
-        return parent::render($request, $exception);
-
+        // uncomment for debugging
+        // error_log($exception);
+        // return parent::render($request, $exception);
         return (new FailResource(['message' => 'Something went wrong!']))->response()->setStatusCode(500);
     }
 }
