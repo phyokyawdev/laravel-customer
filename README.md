@@ -1,11 +1,11 @@
-#Laravel Test Api
+# Laravel Test Api
 
-###System specification
-PHP 8.0
-Laravel Framework 8.83.25
+### System specification
+PHP 8.0 <br />
+Laravel Framework 8.83.25 <br />
 mysql Ver 8.0
 
-###Running
+### Running
 
 1. Clone repository
 2. cd to repository
@@ -17,19 +17,19 @@ mysql Ver 8.0
 8. Run php artisan serve
 9. Go to link localhost:8000
 
-###Exposed routes
-####Passport
-login with username and password
+### Exposed routes
+#### Passport
+login with username and password <br />
 /api/login
 
-####User CRUD
+#### User CRUD
 /api/users
 
-####City CRUD
+#### City CRUD
 /api/cities
 
-####Zone CRUD
+#### Zone CRUD
 /api/zones
 
-####Customer CRUD
+#### Customer CRUD
 /api/customers
