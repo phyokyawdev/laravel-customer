@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CityController;
+use App\Http\Controllers\Api\CustomerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PassportAuthController;
@@ -41,6 +42,11 @@ Route::apiResource('cities', CityController::class);
  * Zone CRUD
  */
 Route::apiResource('zones', ZoneController::class);
+
+/**
+ * Customer CRUD
+ */
+Route::apiResource('customers', CustomerController::class);
 
 /**
  * Non existing
